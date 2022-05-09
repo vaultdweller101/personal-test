@@ -1,0 +1,228 @@
+Log of what I did to set up Node.js and tic-tac-toe
+###################################################
+Microsoft Windows [Version 10.0.22000.613]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Mr Dung>npx create-react-app my-app
+Need to install the following packages:
+  create-react-app
+Ok to proceed? (y) y
+npm WARN deprecated tar@2.2.2: This version of tar is 
+no longer supported, and will not receive security updates. 
+Please upgrade asap.
+
+Creating a new React app in C:\Users\Mr Dung\my-app.
+
+Installing packages. This might take a couple of minutes.
+Installing react, react-dom, and react-scripts with 
+cra-template...
+
+
+added 1377 packages in 40s
+
+176 packages are looking for funding
+  run `npm fund` for details
+
+Initialized a git repository.
+
+Installing template dependencies using npm...
+npm WARN deprecated source-map-resolve@0.6.0: 
+See https://github.com/lydell/source-map-resolve#deprecated
+
+added 39 packages in 4s
+
+176 packages are looking for funding
+  run `npm fund` for details
+Removing template package using npm...
+
+
+removed 1 package, and audited 1416 packages in 2s
+
+176 packages are looking for funding
+  run `npm fund` for details
+
+6 moderate severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+Created git commit.
+
+Success! Created my-app at C:\Users\Mr Dung\my-app
+Inside that directory, you can run several commands:
+
+  npm start
+    Starts the development server.
+
+  npm run build
+    Bundles the app into static files for production.
+
+  npm test
+    Starts the test runner.
+
+  npm run eject
+    Removes this tool and copies build dependencies, 
+configuration files
+    and scripts into the app directory. If you do this, 
+you cannot go back!
+
+We suggest that you begin by typing:
+
+  cd my-app
+  npm start
+
+Happy hacking!
+npm notice
+npm notice New minor version of npm available! 8.5.5 -> 8.8.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v8.8.0
+npm notice Run npm install -g npm@8.8.0 to update!
+npm notice
+
+C:\Users\Mr Dung>npm install -g npm@8.8.0
+
+added 1 package, and audited 202 packages in 2s
+
+11 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+C:\Users\Mr Dung>cd my-app
+
+C:\Users\Mr Dung\my-app>npm start
+
+> my-app@0.1.0 start
+> react-scripts start
+
+You can now view my-app in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://172.28.141.53:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+Terminate batch job (Y/N)? y
+
+C:\Users\Mr Dung\my-app>cd src
+
+C:\Users\Mr Dung\my-app\src>del *
+C:\Users\Mr Dung\my-app\src\*, Are you sure (Y/N)? y
+
+C:\Users\Mr Dung\my-app\src>cd ..
+
+C:\Users\Mr Dung\my-app>cd src
+
+C:\Users\Mr Dung\my-app\src>cd . >index.css
+
+C:\Users\Mr Dung\my-app\src>cd >index.css
+
+C:\Users\Mr Dung\my-app\src>cd index.css
+The directory name is invalid.
+
+C:\Users\Mr Dung\my-app\src>fs.writeFile('index.css',
+<contenet>, callbackFunction)
+The system cannot find the file specified.
+
+C:\Users\Mr Dung\my-app\src>echo var msg >index.css
+
+C:\Users\Mr Dung\my-app\src>code .
+
+C:\Users\Mr Dung\my-app\src>echo >index.js
+
+C:\Users\Mr Dung\my-app\src>code .
+
+C:\Users\Mr Dung\my-app\src>code .
+
+C:\Users\Mr Dung\my-app\src>npm start
+
+C:\Users\Mr Dung\my-app\src>npm run build
+
+> my-app@0.1.0 build
+> react-scripts build
+
+Creating an optimized production build...
+Compiled successfully.
+
+File sizes after gzip:
+
+  46.58 kB  build\static\js\main.ff77c2e6.js
+  362 B     build\static\css\main.22941023.css
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  npm install -g serve
+  serve -s build
+
+Find out more about deployment here:
+
+  https://cra.link/deployment
+
+
+C:\Users\Mr Dung\my-app\src>npm install -g serve
+
+added 93 packages, and audited 94 packages in 4s
+
+10 packages are looking for funding
+  run `npm fund` for details
+
+#######################################################
+Code that I type in and experiment with in tic-tac-toe
+#######################################################
+After adding {this.props.value} the square now shows the square value
+
+Change <button className="square">{...}</button> to 
+<button className="square" onClick={() => console.log('click') }>{...}</button>
+to start showing clicks in Edge's console section (which should be similar to Chrome)
+
+Adding constructor to props to initialize state as null
+
+Replace this.props.value with this.state.value 
+and onClick={...} with onClick={() => this.setState({value: 'X'}) }
+to start showing X wherever you click
+
+Add in constructor for Board and initialize as follow: 
+squares: Array(9).fill(null) 
+to set the Board’s initial state to contain an array of 9 nulls 
+corresponding to the 9 square.
+
+Transform code so that Square is now controlled by Board
+
+With slice(), create a copy of the array instead of modifying existing array
+for the ability of undoing and detecting change
+
+Change square from class that extends React.component to function.
+
+Adding ability to take turns in tic-tac-toe with:
+
+class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+      xIsNext: true,
+    };
+  }
+
+class Board extends React.Component {
+  constructor(props) {...}
+  
+  handleClick(i) {
+    const squares = this.state.squares.slice();
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    this.setState({
+      squares: squares,
+      xIsNext: !this.state.xIsNext,
+    });
+  }
+
+Adding ability to calculate who won. Ignore clicks once someone won
+
+Adding undoing ability 

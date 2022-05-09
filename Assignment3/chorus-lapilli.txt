@@ -1,0 +1,104 @@
+###############################
+Changes compared to tic-tac-toe
+###############################
+
+Additional rules are implemented 
+in handleClick.
+A few things are different in 
+handleClick:
+
+- After both sides placed their 
+3rd piece, a notification would 
+pop up saying that players can 
+only move existing pieces 
+from then onwards.
+- This would be done by player 
+picking one of the pieceand then 
+move it
+- There would be a check for 
+adjacency 
+- If piece in center exists, 
+force the player to move that one,
+or win in the next move.
+
+Checks for when it's time 
+to move pieces if the move 
+steps > 5 
+and no winner is detected 
+then.
+
+Implementation for moving 
+the piece:
+- Select a piece and turn 
+it to blank
+- Next move, select a blank 
+square adjacent to original i 
+while storing the previous i.
+- If the same square is picked, 
+then nothing changes, and then 
+have it still be X's turn.
+Otherwise change turns again
+- If one of your piece is in 
+the center, force movement 
+of that 
+piece to an empty one unless 
+there is a winning move. Do 
+this 
+by reject moves until the 
+player undo
+
+##############
+Turn 3 onwards
+##############
+
+
+Once the notification "Cannot 
+add more. Must move existing 
+pieces." popped up, the player 
+must select one of their 
+piece by click on the piece on 
+the board. Once clicked,
+the piece would dissapear. 
+Then, if a player choose an 
+invalid move, nothing happened 
+and the piece remain dissapear.
+Only when you choose the 
+adjacent blank square would 
+the game allow you to place 
+your piece
+and move forward to the next 
+player.
+Undoing turn is recorded in 
+the history section for 
+easy access.
+
+############
+npm dry run
+############
+
+C:\Users\Mr Dung\chorus-lapilli>npm pack --dry-run
+npm notice
+npm notice package: chorus-lapilli@0.1.0
+npm notice === Tarball Contents ===
+npm notice 3.4kB  README.md
+npm notice 23.7kB chorus-lapilli.tgz
+npm notice 817B   package.json
+npm notice 3.9kB  public/favicon.ico
+npm notice 1.7kB  public/index.html
+npm notice 5.3kB  public/logo192.png
+npm notice 9.7kB  public/logo512.png
+npm notice 492B   public/manifest.json
+npm notice 67B    public/robots.txt
+npm notice 789B   src/index.css
+npm notice 5.6kB  src/index.js
+npm notice === Tarball Details ===
+npm notice name:          chorus-lapilli
+npm notice version:       0.1.0
+npm notice filename:      chorus-lapilli-0.1.0.tgz
+npm notice package size:  47.5 kB
+npm notice unpacked size: 55.4 kB
+npm notice shasum:        7727b79f348f0df1a3a85f0b86c5ffece081bb5e
+npm notice integrity:     sha512-O6mhi0/kh0qkg[...]jPTurHnBiPBdw==
+npm notice total files:   11
+npm notice
+chorus-lapilli-0.1.0.tgz

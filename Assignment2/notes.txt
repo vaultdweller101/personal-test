@@ -1,0 +1,53 @@
+Exercise 2.1
+
+1. To compute  2**(521 - 1) * (2**521 - 1): (* (expt 2 520) (- (expt 2 521) 1)) -->
+68647976601306097149819007990813932172694353001433054093944634591855431833976560521225
+59640661454554977296311391480858037121987999716643812574028291115057152
+   To compute 7^(5^4): (expt 7 (expt 5 4)) --> 2135150283747857799
+2. Compute how many bits are needed to store number: 
+   For 2**(521 - 1) * (2**521 - 1) use (+ 521 (log (- (expt 2 521) 1) 2)) --> 1042 ln(-1042 expt) 
+	calculate above with C-u C-x * e
+   For 7^(5^4) use (+ (log (expt 7 (expt 5 4)) 2) 1) --> 61
+3. 
+C-h k C-h k would pop up a description of "C-h k runs the command describe-key", due to C-h k being
+bind to describe-key, and pressing it twice would be looking up the function of C-h k.
+
+C-h k M-SPC would show the function of M-SPC, or just-one-space, as "Delete all spaces and tabs around point, 
+leaving one space (or N spaces). If N is negative, delete newlines as well, leaving -N spaces.", because C-h k helps describe-key.
+
+Source code of M-SPC is:
+
+(defun just-one-space (&optional n)                                                                      |
+  "Delete all spaces and tabs around point, leaving one space (or N spaces).                             |
+If N is negative, delete newlines as well, leaving -N spaces.                                            |
+See also `cycle-spacing'."                                                                               |
+  (interactive "*p")                                                                                     |
+  (cycle-spacing n nil 'single-shot))
+
+Exercise 2.3
+1. The file /dev/null is an empty file, meaning when randline.py tries to read from the file
+and index the elements in the file, it assumes the file has something in it.
+When run the command $python2 randline.py /dev/null I get:
+File "/usr/lib64/python2.7/random.py", line 277, in choice
+    return seq[int(self.random() * len(seq))]  # raises IndexError if seq is empty
+IndexError: list index out of range
+As the seq is empty we get the index error.
+
+2. I would get this error if I run it in python3:
+File "randline.py", line 65
+    except IOError as (errno, strerror):
+                      ^
+SyntaxError: invalid syntax
+This is due to exceptions in python2 being iterable, and you can iterate over the parameters 
+given to the exception by iterating over the exception itself.
+As automatic tuple unpacking has been removed in Python3, (errno, strerror) passed in an exception
+gives an error as this is a tuple.
+
+A fix would be to pass a single parameter in:
+	except IOError as err:
+
+3. If I run this python2 I get this error:
+match ir_str.split("-"):
+               ^
+SyntaxError: invalid syntax
+Due to this not being a feature in python2

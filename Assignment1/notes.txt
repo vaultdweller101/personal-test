@@ -1,0 +1,55 @@
+1. sh and sleep belong in /usr/bin. sleep is also in usr/local/cs/bin. export is a built-in shell command. Find out using type command $ type sh, $ type sleep, $ type export
+2. usr/bin/du estimate file space usage and usr/bin/su run a command with substitute user and group ID. Find out using $find ?u and $ man du and $ man su
+3. /usr/local/cs/bin/emacs-27.2 is the actual executable. Find using $ find . -samefile /usr/local/cs/bin/emacs
+4. Run $ /usr/bin/gcc -v for the version of the file and receive 8.5.0 20210514. Run gcc -v for the version of the plain file and receive 11.2.0. The reason for this is the two commands run 2 different versions of GCC.
+5. Using $ man chmod, u+sx means file owner can set user or group ID on execution and execute/search the file; o-w means other users not in that file group cannot write in the file.
+6. Use $ find /usr/local/cs -type d -mtime -28.
+The result is 
+/usr/local/cs
+/usr/local/cs/ocaml-4.14.0
+/usr/local/cs/ocaml-4.14.0/bin
+/usr/local/cs/ocaml-4.14.0/lib
+/usr/local/cs/ocaml-4.14.0/lib/ocaml
+/usr/local/cs/ocaml-4.14.0/lib/ocaml/stublibs
+/usr/local/cs/ocaml-4.14.0/lib/ocaml/compiler-libs
+/usr/local/cs/ocaml-4.14.0/lib/ocaml/caml
+/usr/local/cs/ocaml-4.14.0/lib/ocaml/threads
+/usr/local/cs/ocaml-4.14.0/lib/ocaml/ocamldoc
+/usr/local/cs/ocaml-4.14.0/share
+/usr/local/cs/ocaml-4.14.0/share/doc
+/usr/local/cs/ocaml-4.14.0/share/doc/ocaml
+/usr/local/cs/ocaml-4.14.0/man
+/usr/local/cs/ocaml-4.14.0/man/man1
+/usr/local/cs/ocaml-4.14.0/man/man3
+/usr/local/cs/bin
+/usr/local/cs/gzip-1.12
+/usr/local/cs/gzip-1.12/share
+/usr/local/cs/gzip-1.12/share/info
+/usr/local/cs/gzip-1.12/share/man
+/usr/local/cs/gzip-1.12/share/man/man1
+/usr/local/cs/gzip-1.12/bin
+/usr/local/cs/share/info
+/usr/local/cs/share/man/man1
+/usr/local/cs/share/man/man3
+/usr/local/cs/src/gdb
+/usr/local/cs/src/gdb/RCS
+/usr/local/cs/src/gzip
+/usr/local/cs/src/gzip/RCS
+/usr/local/cs/src/help2man
+/usr/local/cs/src/help2man/RCS
+/usr/local/cs/src/ocaml
+/usr/local/cs/src/ocaml/RCS
+/usr/local/cs/help2man-1.49.1
+/usr/local/cs/help2man-1.49.1/bin
+/usr/local/cs/help2man-1.49.1/share
+/usr/local/cs/help2man-1.49.1/share/man
+/usr/local/cs/help2man-1.49.1/share/man/man1
+/usr/local/cs/help2man-1.49.1/share/info
+7. Using find /usr/bin -type l | wc -l the number of symlink files in usr/bin (same directory as usr/bin/find) is 319
+8. Oldest regular file is the symlink libbz2.so.1 -> libbz2.so.1.0.6 using command $ ls -lt, last created Aug 12 2018, is nearly 4 years old.
+9. In Emacs, using C-h a transpose, all possible commands are:
+transpose-chars                         transpose-lines                         transpose-paragraphs
+transpose-sentences                     transpose-sexps                         transpose-words
+10. Yank reinsert ("paste") the last stretch of killed text, and is bounded to C-y. Find out using C-h f yank
+11. Emacs did not ignore . and .., while ls -l did. Emacs also shown the amount of memory available. Find out using C-x d and ls -l
+12. Using $ps -x --forest I found out the process tree as follow: sshd: quang@pts/20 -> -bash -> ps -x --forest

@@ -1,0 +1,149 @@
+Log of what I 
+did to set
+up Node.js and 
+tic-tac-toe
+##############
+
+C:\Users\Mr Dung>npx create-react-app 
+my-app
+
+C:\Users\Mr Dung>cd my-app
+
+C:\Users\Mr Dung\my-app>npm 
+start
+
+C:\Users\Mr Dung\my-app>cd src
+
+C:\Users\Mr Dung\my-app\src>del *
+C:\Users\Mr Dung\my-app\src\*, 
+Are you sure (Y/N)? y
+
+C:\Users\Mr Dung\my-app\src>cd ..
+
+C:\Users\Mr Dung\my-app>cd src
+
+C:\Users\Mr Dung\my-app\src>cd . >index.css
+
+C:\Users\Mr Dung\my-app\src>cd >index.css
+
+C:\Users\Mr Dung\my-app\src>cd index.css
+The directory name is invalid.
+
+C:\Users\Mr Dung\my-app\src>fs.writeFile('index.css',
+<contenet>, callbackFunction)
+The system cannot find the file specified.
+
+C:\Users\Mr Dung\my-app\src>echo var msg >index.css
+
+C:\Users\Mr Dung\my-app\src>code .
+
+C:\Users\Mr Dung\my-app\src>echo >index.js
+
+C:\Users\Mr Dung\my-app\src>code .
+
+C:\Users\Mr Dung\my-app\src>code .
+
+C:\Users\Mr Dung\my-app\src>npm start
+
+C:\Users\Mr Dung\my-app\src>npm run build
+
+> my-app@0.1.0 build
+> react-scripts build
+
+Creating an optimized production build...
+Compiled successfully.
+
+File sizes after gzip:
+
+  46.58 kB  build\static\js\main.ff77c2e6.js
+  362 B     build\static\css\main.22941023.css
+
+The project was built assuming it is hosted at /.
+You can control this with the homepage field in your package.json.
+
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  npm install -g serve
+  serve -s build
+
+Find out more about deployment here:
+
+  https://cra.link/deployment
+
+
+C:\Users\Mr Dung\my-app\src>npm install -g serve
+
+added 93 packages, and audited 94 packages in 4s
+
+10 packages are looking for funding
+  run `npm fund` for details
+
+##############################
+Experiment with in tic-tac-toe
+##############################
+After adding {this.props.value} 
+the square now shows the square value
+
+Change <button className="square">{...}</button> to 
+<button className="square" onClick={() 
+=> console.log('click') }>{...}</button>
+to start showing clicks in Edge's console 
+section (which should be similar to Chrome)
+
+Adding constructor to props to initialize 
+state as null
+
+Replace this.props.value 
+with this.state.value 
+and onClick={...} with 
+onClick={() => this.setState({value: 'X'}) }
+to start showing X wherever you click
+
+Add in constructor for Board 
+and initialize as follow: 
+squares: Array(9).fill(null) 
+to set the Board’s initial 
+state to contain an array of 9 nulls 
+corresponding to the 9 square.
+
+Transform code so that Square 
+is now controlled by Board
+
+With slice(), create a copy 
+of the array instead of 
+modifying existing array
+for the ability of undoing 
+and detecting change
+
+Change square from class 
+that extends React.component
+to function.
+
+Adding ability to take turns 
+in tic-tac-toe with:
+
+class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+      xIsNext: true,
+    };
+  }
+
+class Board extends React.Component {
+  constructor(props) {...}
+  
+  handleClick(i) {
+    const squares = this.state.squares.slice();
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    this.setState({
+      squares: squares,
+      xIsNext: !this.state.xIsNext,
+    });
+  }
+
+Adding ability to calculate who won. Ignore clicks once someone won
+
+Adding undoing ability 
